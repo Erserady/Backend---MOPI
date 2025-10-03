@@ -6,7 +6,7 @@ from django.db import transaction
 
 User = get_user_model()
 
-print(User.objects.filter(usuario__in=["", None]).values('id','username','email') )
+##print(User.objects.filter(usuario__in=["", None]).values('id','username','email') )
 from django.db.models import Count
 dups = User.objects.values('usuario').annotate(c=Count('id')).filter(c__gt=1)
 print(list(dups))
