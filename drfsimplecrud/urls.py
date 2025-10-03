@@ -1,27 +1,22 @@
-"""drfsimplecrud URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+# drfsimplecrud/urls.py (reemplazo seguro)
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls.static import static
 from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('projects.urls')),
-    path('api/users/', include('users.urls')),
-    path('cocina/', include('cocina.urls')),   # -> /cocina/pedidos/
-    path('api/', include('cocina.urls')),      # -> /api/orders/ y /api/orders/kitchen/
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+    # Rutas principales por app, con prefijos claros — evita includes colisionantes
+    path('', include('projects.urls')),          # si projects.urls tiene root pages
+    path('api/users/', include('users.urls')),   # -> /api/users/...
+    path('api/cocina/', include('cocina.urls')), # -> /api/cocina/orders/ and /api/cocina/kitchen/
+    path('api/mesero/', include('mesero.urls')), # -> /api/mesero/... and avoids collision
+
+    # vistas HTML
+    path('cocina/', include('cocina.urls')),     # -> /cocina/pedidos/ (si quieres frontend directo)
+    path('mesero/', include('mesero.urls')),     # -> /mesero/pedido/
+]
+
+# servir estáticos en dev
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
