@@ -22,4 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('projects.urls')),
     path('api/users/', include('users.urls')),
+    path('cocina/', include('cocina.urls')),   # -> /cocina/pedidos/
+    path('api/', include('cocina.urls')),      # -> /api/orders/ y /api/orders/kitchen/
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
