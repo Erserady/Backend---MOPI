@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'cocina',
     'mesero',
+    'caja',
 ]
 
 AUTH_USER_MODEL = 'users.User'

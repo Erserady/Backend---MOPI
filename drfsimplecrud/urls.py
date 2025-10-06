@@ -16,6 +16,9 @@ urlpatterns = [
     # vistas HTML
     path('cocina/', include('cocina.urls')),     # -> /cocina/pedidos/ (si quieres frontend directo)
     path('mesero/', include('mesero.urls')),     # -> /mesero/pedido/
+
+    path('api/caja/', include('caja.urls')),
+    path('caja/', include('caja.urls')),
 ]
 
 # servir estáticos en dev
