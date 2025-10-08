@@ -19,6 +19,7 @@ urlpatterns = [
 
     path('api/caja/', include('caja.urls')),
     path('caja/', include('caja.urls')),
+    path('api/administrador/', include('administrador.urls')),
 ]
 
 # servir estáticos en dev

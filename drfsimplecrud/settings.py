@@ -16,7 +16,7 @@ import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'cocina',
     'mesero',
     'caja',
+    'administrador',
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -89,13 +90,20 @@ WSGI_APPLICATION = 'drfsimplecrud.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+#DATABASES = {
+#    'default': dj_database_url.config(
+#        # Feel free to alter this value to suit your needs.
+#        default=os.environ.get('DATABASE_URL'),
+#        conn_max_age=600,
+#        ssl_require=True
+#    )
+#}
+
 DATABASES = {
-    'default': dj_database_url.config(
-        # Feel free to alter this value to suit your needs.
-        default=os.environ.get('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),  
+    }
 }
 
 
