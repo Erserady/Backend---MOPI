@@ -1,24 +1,24 @@
-from django.shortcuts import render
-from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
-from .serializers import UserCreateSerializer, UserSerializer, LoginSerializer
 from django.db import transaction
 
+from .serializers import UserCreateSerializer, UserSerializer, LoginSerializer
 
 User = get_user_model()
+
 
 class RegisterView(GenericAPIView):
     """
     Registro de usuarios:
-    - acepta JSON con 'username', 'email' y 'password'
+    - acepta JSON con 'username', 'email', 'password' y opcionalmente 'role'
     - crea el usuario (User.objects.create_user)
     - genera/recupera token y devuelve token + datos del usuario
     """
+
     serializer_class = UserCreateSerializer
     permission_classes = [AllowAny]
 
@@ -39,7 +39,7 @@ class RegisterView(GenericAPIView):
 
         return Response(
             {"token": token.key, "user": user_data},
-            status=status.HTTP_201_CREATED
+            status=status.HTTP_201_CREATED,
         )
 
 
